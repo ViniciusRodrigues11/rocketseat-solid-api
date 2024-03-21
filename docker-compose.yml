@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  gym-database:
+    image: bitnami/postgresql:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=gym
+    volumes:
+      - gym_pg_data:/bitnami/postgresql
+
+volumes:
+  gym_pg_data:
