@@ -9,7 +9,7 @@
     "test": "vitest run --coverage",
     "test:dev": "vitest run",
     "test:create-prisma-environment": "pnpm link ./prisma/vitest-environment-prisma",
-    "pretest:integration": "run-s test:create-prisma-environment && echo 'Pretest ok",
+    "pretest:integration": "run-s test:create-prisma-environment && echo 'Pretest ok'",
     "test:integration": "vitest run --dir tests/integration",
     "test:unit": "vitest run --dir tests/unit",
     "test:watch": "vitest --dir tests/",
