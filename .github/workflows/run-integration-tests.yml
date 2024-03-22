@@ -1,0 +1,44 @@
+name: Run integration tests
+
+on: [pull_request]
+
+jobs:
+  run-unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    
+    # Set up the database    
+    services:
+      postgres:
+        image: bitnami/postgresql
+        ports:
+          - 5432:5432
+        env:
+          POSTGRESQL_USERNAME: docker
+          POSTGRESQL_PASSWORD: docker
+          POSTGRESQL_DATABASE: apisolid
+        
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v3
+        name: Install Node
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+        name: Install dependencies
+
+      - run: pnpm run test:integration
+        name: Run Unit Tests
+        env:
+          JWT_SECRET: testing-secret
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
