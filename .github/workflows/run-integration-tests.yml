@@ -37,6 +37,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
         name: Install dependencies
 
+      - run: pnpm run pretest:integration
+        name: Run integration Tests
+
       - run: pnpm run test:integration
         name: Run integration Tests
         env:
