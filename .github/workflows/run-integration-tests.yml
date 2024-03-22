@@ -38,7 +38,7 @@ jobs:
         name: Install dependencies
 
       - run: pnpm run test:integration
-        name: Run Unit Tests
+        name: Run integration Tests
         env:
           JWT_SECRET: testing-secret
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
